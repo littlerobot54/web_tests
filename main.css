@@ -1,0 +1,106 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Heebo', sans-serif;
+}
+
+body {
+    background-color: #eee;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container {
+    background-color: #D1F2EB;
+
+    /*Only during test*/
+    height: 800px;
+}
+
+#calc {
+    width: 400px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+/*      --DISPLAY--     */
+#display {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#display-first-line {
+    background-color: white;
+    padding: 5px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#display-second-line {
+    background-color: white;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+
+
+/*      --KEYS--     */
+#keys {
+    background-color: white;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    margin: 20px;
+    height: 500px;
+}
+
+.button {
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+
+    border: none;
+    text-decoration: none;
+    outline-style: none;
+}
+
+.button-number {
+    background-color: #fff;
+}
+
+#button-0 {
+    background-color: red;
+}
+
+#button-divide {
+    background-color: #1ABC9C;
+}
+
+#button-multiply {
+    background-color: #F5B041;
+}
+
+#button-substract {
+    background-color: #EC7063;
+}
+
+#button-additon {
+    background-color: #5DADE2;
+}
+
+#button-equal {
+    background-color: #A569BD;
+}
+
+.button-other {
+    background-color: #eee;
+}

@@ -1,16 +1,43 @@
 <!DOCTYPE html>
-
 <html>
     <head>
-        <title>TODO list</title>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="main.css" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, user-scalable=1.0">
     </head>
     <body>
-        <form id='todo-form'>
-            <input type='text' id='todo'/>
-            <input type="submit" value="send">
-        </form>
-        <ul id="todo-list">
-        </ul>
+        <div id='main-container' class="flex-container">
+            <div id='calc'>
+                <div id='display'>
+                    <div id='display-first-line'>
+                        FIRST LINE
+                    </div>
+                    <div id='display-second-line'>
+                        SECOND LINE
+                    </div>
+                </div>
+                <div id ='keys' class="flex-container">
+                    <button style="order: 16" class='button' id='button-0'>0</button>
+                    <button style="order: 12" class='button button-number' id='button-1'>1</button> 
+                    <button style="order: 13" class='button button-number' id='button-2'>2</button>
+                    <button style="order: 14" class='button button-number' id='button-3'>3</button>
+                    <button style="order: 8" class='button button-number' id='button-4'>4</button>
+                    <button style="order: 9" class='button button-number' id='button-5'>5</button>
+                    <button style="order: 10" class='button button-number' id='button-6'>6</button>
+                    <button style="order: 4" class='button button-number' id='button-7'>7</button>
+                    <button style="order: 5" class='button button-number'id='button-8' >8</button>
+                    <button style="order: 6" class='button button-number' id='button-9'>9</button>
+                    <button style="order: 3" class='button' id='button-divide'>&divide</button>
+                    <button style="order: 7" class='button' id='button-multiply'>&times</button>
+                    <button style="order: 11" class='button' id='button-substract'>-</button>
+                    <button style="order: 15" class='button' id='button-additon'>+</button>
+                    <button style="order: 17" class='button' id='button-equal'>=</button>
+                    <button style="order: 0" class='button button-other' id='button-C'>C</button>
+                    <button style="order: 1" class='button button-other' id='button-CE'>CE</button>
+                    <button style="order: 2" class='button button-other' id='button-%'>%</button>
+                </div>
+            </div>
+        </div>
     </body>
-    <script src='main.js'></script>
 </html>
