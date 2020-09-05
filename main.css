@@ -5,9 +5,10 @@
 }
 
 body {
-    background-color: #eee;
+    background-color: #D1F2EB;
 }
 
+/*      --CONTAINERS--     */
 .flex-container {
     display: flex;
     align-items: center;
@@ -18,7 +19,7 @@ body {
     background-color: #D1F2EB;
 
     /*Only during test*/
-    height: 800px;
+    height: 750px;
 }
 
 #calc {
@@ -30,6 +31,7 @@ body {
 /*      --DISPLAY--     */
 #display {
     margin: 20px;
+    height: 118px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -37,18 +39,22 @@ body {
 
 #display-first-line {
     background-color: white;
-    padding: 5px;
+    height: 50px;
+    opacity: 0.5;
     font-weight: 700;
     font-size: 20px;
+    max-width: 350px;
+    overflow: auto;
 }
 
 #display-second-line {
     background-color: white;
-    padding: 10px;
+    height: 85px;
     font-weight: 700;
     font-size: 40px;
+    max-width: 350px;
+    overflow: auto;
 }
-
 
 
 /*      --KEYS--     */
@@ -76,31 +82,57 @@ body {
 .button-number {
     background-color: #fff;
 }
+.button:active {
+    background-color: #b2b2b2;
+}
 
-#button-0 {
-    
+.button-empty {
+    visibility: hidden;
 }
 
 #button-divide {
     background-color: #1ABC9C;
+    font-size: 28px;
+}
+#button-divide:active {
+    background-color: #12836d;
 }
 
 #button-multiply {
     background-color: #F5B041;
+    font-size: 28px;
+}
+#button-multiply:active {
+    background-color: #ab7b2d;
 }
 
 #button-substract {
     background-color: #EC7063;
+    font-size: 40px;
+}
+#button-substract:active {
+    background-color: #a54e45;
 }
 
 #button-additon {
     background-color: #5DADE2;
+    font-size: 28px;
+}
+#button-additon:active {
+    background-color: #41799e;
 }
 
 #button-equal {
     background-color: #A569BD;
+    font-size: 28px;
+}
+#button-equal:active {
+    background-color: #734984;
 }
 
 .button-other {
     background-color: #eee;
+}
+.button-other:active {
+    background-color: #a6a6a6;
 }
