@@ -42,21 +42,21 @@ for (i=0; i<squares.length; i++) {
 function dificultyBtn(e) {
         switch (e.target.id) {
             case 'easy-btn':
+                newColor();
                 easyBtn.classList.add('statusBar-btn-pressed');
                 hardBtn.classList.remove('statusBar-btn-pressed');
-                
                 for (i=3; i<6; i++){
                     squares[i].style.display = 'none';
                 }
-                newColor();
                 break;
             case 'hard-btn':
+                newColor();
                 hardBtn.classList.add('statusBar-btn-pressed');
                 easyBtn.classList.remove('statusBar-btn-pressed');
                 for (i=3; i<6; i++){
                     squares[i].style.display = '';
                 }
-                newColor();
+                
                 break;
             default:
                 break;
@@ -66,6 +66,11 @@ function dificultyBtn(e) {
 function newColor(e) {
     // Change color of header
     header.style.backgroundColor = defaultColor;
+
+    // Show hidden squares
+    for (i=0; i<pressedSquares.length; i++) {
+        pressedSquares[i].style.display = '';
+    }
 
     // Add random colors to squares
     for (i=0; i < squares.length; i++){
