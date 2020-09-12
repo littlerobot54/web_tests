@@ -1,142 +1,115 @@
+/* --        VARIABLES        -- */
+:root {
+    --global-color: #045452;
+}
+
+
+/* --        GENERAL PROPUSE        -- */
 * {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    font-family: 'Zilla Slab', serif;
 }
 *:focus {
     outline: none;
 }
-.material-icons {
-    pointer-events: none;
-}
-
 body {
-    background: linear-gradient(70deg,#017fc9,#67e07e);
-    font-family: 'Roboto Slab', serif;
-    color: white;
     min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    background: #222;
 }
 
+
+/* --        HEADER       -- */
 header {
-    font-family: 'Lato', sans-serif;
-    font-size: 2rem;
-}
-
-header, form {
-    min-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.inputBar {
-    display: flex;
-    justify-content: center;
-}
-
-form input, form button{
-    padding: 0.5rem;
-    font-size: 1.7rem;
-    border: none;
-    background: white;
-}
-
-form button {
-    color: #017fc9;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3 ease;
-}
-form button:hover {
-    background: #017fc9;
+    padding: 2vh;
+    background-color: var(--global-color);
     color: white;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
-.todo-container {
+
+/* --       STATUS BAR        -- */
+.statusBar {
+    background-color: #eee;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
-.todo-list {
-    min-width: 30%;
-    max-width: 80%;
-    list-style: none;
+.statusBar-result {
+    margin: 0vh 5vh 0vh 5vh;
+    font-size: 1.5rem;
+    text-align: center;
 }
-.todo-input {
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-}
-
-.todo-button {
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-
-.todo {
-    margin: 1rem;
-    min-width: 40vh;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    background: white;
+.statusBar-btn {
+    padding: 1vh;
+    border: none;
+    background-color: transparent;
     color: black;
     font-size: 1.5rem;
-    border-radius: 1.5rem;
+    width: 25vw;
+    height: 100%;
+    min-height: 100%;
+    transition: 0.5s;
 }
-.todo li {
-    padding-left: 1.5vh;
-    padding-right: 1vh;
+.statusBar-btn:hover {
+    background-color: var(--global-color);
+    color: white;
+}
+.statusBar-btn-pressed {
+    background-color: var(--global-color);
+    color: white;
+}
+.statusBar-btn, .statusBar-result, .statusBar-dificult{
     flex: 1;
 }
 
-.trash-btn, .completed-btn {
-    color: white;
-    border: none;
-    padding: 1rem;
-    cursor: pointer;
-    font-size: 1rem;
+/* --       BOARD      -- */
+.board {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    vertical-align: top;
 }
-.trash-btn{
-    background-color: crimson;
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
+.square-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100vw;
+    height: 10vh;
+    margin-top: 1vh;
+    flex-basis: 65%;
 }
-.completed-btn {
-    background: turquoise;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-}
-
-.completed{
-    opacity: 0.5;
-    text-decoration: line-through;
-}
-
-.fall {
-    transition-duration: 0.5s;
-    transform: translateY(8rem) rotateZ(20deg);
-    opacity: 0;
+.square {
+    margin: 1.5vw;
+    width: 19vh;
+    height: 19vh;
+    border-radius: 2rem;
+    background-color: #009c8c;
 }
 
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
-    border: none;
-
-    padding: 0.5rem;
-    display: block;
-    width: 10rem;
-    cursor: pointer;
-    border-radius: 1.5rem;
-    font-size: 1rem;
-    color: #017fc9;
-    background: white;
-}
-.select {
-    margin: 1rem;
-    position: relative;
-    overflow: hidden;
+/* --       LOW RESOLUTION SUPPORT      -- */
+@media(max-width: 600px) {
+    header {
+        font-size: 1.5rem;
+    }
+    .statusBar-result {
+        font-size: 1.3rem;
+    }
+    .statusBar-btn {
+        font-size: 1.3rem;
+    }
+    .square {
+        width: 15vh;
+        height: 15vh;
+    }
 }

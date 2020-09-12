@@ -1,162 +1,109 @@
-// --       Selectors       --
-const todoInput = document.querySelector('.todo-input');
-const todoButton = document.querySelector('.todo-button');
-const todoList = document.querySelector('.todo-list');
-const filterOption = document.querySelector('.filter-todo');
+// --       Variables and Constants     --
+var declaration = getComputedStyle(document.documentElement)
+var defaultColor = declaration.getPropertyValue('--global-color');
 
-// --       Event Listeners     --
-document.addEventListener('DOMContentLoaded', getLocalTodos)
-todoButton.addEventListener('click', addTodo);
-todoList.addEventListener('click', delateCheck);
-filterOption.addEventListener('change', filterTodo);
+var correctColor = '';
+var pressedSquares = [];
+
+
+// --       Selectors       --
+// General
+const header = document.querySelector('header')
+
+// Header
+const rgbCode = document.querySelector('.rgbCode');
+
+// Status bar
+const newColorsaBtn = document.querySelector('.statusBar-btn');
+const resultText = document.querySelector('.statusBar-result')
+const easyBtn = document.querySelector('#easy-btn');
+const hardBtn = document.querySelector('#hard-btn');
+
+// Squares
+const squares = document.querySelectorAll('.square');
+
+
+// --       Event Listeners       --
+// Start
+document.addEventListener('DOMContentLoaded', newColor)
+
+// Dificulty
+easyBtn.addEventListener('click', dificultyBtn);
+hardBtn.addEventListener('click', dificultyBtn);
+
+// Square colors
+newColorsaBtn.addEventListener('click', newColor);
+for (i=0; i<squares.length; i++) {
+    squares[i].addEventListener('click', squarePressed);
+}
+
 
 // --       Functions       --
-function addTodo(e){
-    // Prevent form from submitting
-    event.preventDefault();
-
-    // Evaluate input
-    if (todoInput.value != "") {
-        // Todo DIV
-        const todoDiv = document.createElement('div');
-        todoDiv.classList.add('todo');
-        // Create LI
-        const newTodo = document.createElement('li');
-        newTodo.innerText = todoInput.value
-        newTodo.classList.add('todo-item');
-        // Add LI to Todo DIV
-        todoDiv.appendChild(newTodo);
-        // Add ToDo to localStorage
-        console.log(todoInput.value)
-        saveLocalTodos(todoInput.value);
-        // Completed button
-        const completedButton = document.createElement('button');
-        completedButton.classList.add('completed-btn');
-        completedButton.innerHTML="<i class='material-icons'>check_circle_outline</i>";
-        todoDiv.appendChild(completedButton);
-        // Trash button
-        const trashButton = document.createElement('button');
-        trashButton.classList.add('trash-btn');
-        trashButton.innerHTML="<i class='material-icons'>delete_outline</i>";
-        todoDiv.appendChild(trashButton);
-        // Append to list
-        todoList.appendChild(todoDiv);
-        // Clear input
-        todoInput.value = ""
-    }
-}
-
-function delateCheck (e) {
-    const item = e.target;
-    // Delate ToDo
-    if (item.classList[0] === 'trash-btn') {
-        const todo = item.parentElement;
-        // Animation
-        todo.classList.add('fall')
-        removeLocalTodos(todo);
-        todo.addEventListener('transitionend', function(){
-            todo.remove();
-            
-        })
-        
-    } else if (item.classList[0] === 'completed-btn') {
-        const todo = item.parentElement;
-        if (todo.classList.contains('completed')) {
-            todo.classList.remove('completed');
-        } else {
-            todo.classList.add('completed');
-        }
-    }
-}
-
-function filterTodo (e) {
-    const todos = todoList.childNodes;
-    todos.forEach(function(todo){
-        switch(e.target.value){
-            case 'all':
-                console.log('all')
-                todo.style.display = 'flex';
-                break;
-            case 'completed':
-                if (todo.classList.contains('completed')){
-                    console.log('completed-true')
-                    todo.style.display = 'flex';
-                } else {
-                    console.log('completed-false')
-                    todo.style.display = 'none';
+function dificultyBtn(e) {
+        switch (e.target.id) {
+            case 'easy-btn':
+                easyBtn.classList.add('statusBar-btn-pressed');
+                hardBtn.classList.remove('statusBar-btn-pressed');
+                
+                for (i=3; i<6; i++){
+                    squares[i].style.display = 'none';
                 }
+                newColor();
                 break;
-            case 'uncompleted':
-                if (todo.classList.contains('completed')){
-                    console.log('uncompleted-true')
-                    todo.style.display = 'none';
-                } else {
-                    console.log('uncompleted-false')
-                    todo.style.display = 'flex';
+            case 'hard-btn':
+                hardBtn.classList.add('statusBar-btn-pressed');
+                easyBtn.classList.remove('statusBar-btn-pressed');
+                for (i=3; i<6; i++){
+                    squares[i].style.display = '';
                 }
+                newColor();
                 break;
             default:
                 break;
         }
-    })
 }
 
-function saveLocalTodos(todo) {
-    // Check if there is already local storage
-    let todos;
-    if (localStorage.getItem('todos') === null) {
-        todos = [];
-    } else {
-        todos = JSON.parse(localStorage.getItem('todos'));
+function newColor(e) {
+    // Change color of header
+    header.style.backgroundColor = defaultColor;
+
+    // Add random colors to squares
+    for (i=0; i < squares.length; i++){
+        let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+        squares[i].style.backgroundColor = randomColor;
     }
-    todos.push(todo);
-    localStorage.setItem('todos', JSON.stringify(todos));
+    // Get all active squares
+    let activeSquare = 0;
+    for(i=0; i<squares.length; i++) {
+        if (squares[i].style.display === '') {
+            activeSquare += 1;
+        }
+    }
+    // Choose random square color to be the correct
+    let randomSquareNum = Math.floor(Math.random()*activeSquare);
+    correctColor = squares[randomSquareNum].style.backgroundColor;
+    // Show the color code to be guessed
+    rgbCode.innerText = correctColor.toUpperCase();
 }
 
-function getLocalTodos() {
-    // Check if there is already local storage
-    let todos;
-    if (localStorage.getItem('todos') === null) {
-        todos = [];
+function squarePressed(e) {
+    pressedColor = e.target.style.backgroundColor;
+    if (pressedColor === correctColor) {
+        // Show hidden squares
+        for (i=0; i<pressedSquares.length; i++) {
+            pressedSquares[i].style.display = '';
+        }
+        // Show correct
+        resultText.innerText = 'CORRECT';
+        for(i=0; i<squares.length; i++) {
+            squares[i].style.backgroundColor = correctColor;
+        }
+        header.style.backgroundColor = correctColor;
     } else {
-        todos = JSON.parse(localStorage.getItem('todos'));
+        // Hide square and add it to hidden list
+        pressedSquares.push(e.target);
+        e.target.style.display = 'none';
+        // Show try afain
+        resultText.innerText = 'TRY AGAIN';
     }
-    todos.forEach(function(todo){
-        // Todo DIV
-        const todoDiv = document.createElement('div');
-        todoDiv.classList.add('todo');
-        // Create LI
-        const newTodo = document.createElement('li');
-        newTodo.innerText = todo
-        newTodo.classList.add('todo-item');
-        // Add LI to Todo DIV
-        todoDiv.appendChild(newTodo);
-        // Add ToDo to localStorage
-        console.log(todoInput.value)
-        // Completed button
-        const completedButton = document.createElement('button');
-        completedButton.classList.add('completed-btn');
-        completedButton.innerHTML="<i class='material-icons'>check_circle_outline</i>";
-        todoDiv.appendChild(completedButton);
-        // Trash button
-        const trashButton = document.createElement('button');
-        trashButton.classList.add('trash-btn');
-        trashButton.innerHTML="<i class='material-icons'>delete_outline</i>";
-        todoDiv.appendChild(trashButton);
-        // Append to list
-        todoList.appendChild(todoDiv);
-    })
-}
-
-function removeLocalTodos(todo) {
-    // Check if there is already local storage
-    let todos;
-    if (localStorage.getItem('todos') === null) {
-        todos = [];
-    } else {
-        todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    const todoIndex = todo.children[0].innerText;
-    todos.splice(todos.indexOf(todoIndex), 1);
-    localStorage.setItem('todos', JSON.stringify(todos));
 }
