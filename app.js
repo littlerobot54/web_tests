@@ -43,6 +43,7 @@ function dificultyBtn(e) {
         switch (e.target.id) {
             case 'easy-btn':
                 newColor();
+                resultText.innerText = ''
                 easyBtn.classList.add('statusBar-btn-pressed');
                 hardBtn.classList.remove('statusBar-btn-pressed');
                 for (i=3; i<6; i++){
@@ -50,13 +51,13 @@ function dificultyBtn(e) {
                 }
                 break;
             case 'hard-btn':
+                resultText.innerText = ''
                 newColor();
                 hardBtn.classList.add('statusBar-btn-pressed');
                 easyBtn.classList.remove('statusBar-btn-pressed');
                 for (i=3; i<6; i++){
                     squares[i].style.display = '';
                 }
-                
                 break;
             default:
                 break;
@@ -94,13 +95,10 @@ function newColor(e) {
 function squarePressed(e) {
     pressedColor = e.target.style.backgroundColor;
     if (pressedColor === correctColor) {
-        // Show hidden squares
-        for (i=0; i<pressedSquares.length; i++) {
-            pressedSquares[i].style.display = '';
-        }
         // Show correct
         resultText.innerText = 'CORRECT';
         for(i=0; i<squares.length; i++) {
+            squares[i].style.display = ''
             squares[i].style.backgroundColor = correctColor;
         }
         header.style.backgroundColor = correctColor;
